@@ -1,0 +1,31 @@
+{
+  "name": "modular_posts",
+  "version": "1.0.0",
+  "description": "A new Flutter project using Dio, Modular w/ MobX to show posts provided by JSONPlaceholder",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-cz"
+  },
+  "keywords": [
+    "Flutter",
+    "Modular",
+    "Dio",
+    "JSONPlaceholder"
+  ],
+  "author": "Victor Emanuel",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "cz-conventional-changelog": "^3.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
