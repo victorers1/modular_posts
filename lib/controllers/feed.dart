@@ -8,4 +8,10 @@ class FeedController = _FeedControllerBase with _$FeedController;
 abstract class _FeedControllerBase with Store {
   List<User> users = [];
   List<Post> posts = [];
+
+  @action
+  Future<List<User>> getUsers() async {}
+
+  @action
+  Future<List<Post>> getPost() async {}
 }

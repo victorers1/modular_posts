@@ -7,10 +7,22 @@ class Feed extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: <Widget>[
-          Post(),
-          Post(),
-          Post(),
-          Post(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Post(),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Post(),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Post(),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Post(),
+          ),
         ],
       ),
     );
