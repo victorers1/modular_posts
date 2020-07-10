@@ -12,8 +12,7 @@ class TabsPage extends StatefulWidget {
 }
 
 class _TabsPageState extends State<TabsPage> {
-  // final tabsController = Modular.get<TabController>(); // TODO: use modular
-  final tabsController = TabsController();
+  final tabsController = Modular.get<TabsController>();
 
   Future<List<Post>> loadFeed() async {}
   @override
@@ -32,7 +31,6 @@ class _TabsPageState extends State<TabsPage> {
                 break;
               default:
                 if (snapshot.hasError) {
-                  // TODO: perguntar a Matthaus por que usar StreamBuilder
                 } else {
                   return Observer(builder: (_) {
                     return IndexedStack(
