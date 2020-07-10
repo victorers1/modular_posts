@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_posts/controllers/tabs.dart';
 import 'package:modular_posts/pages/intro.dart';
 import 'package:modular_posts/pages/tabs.dart';
+import 'package:modular_posts/theme.dart';
 
 /// InitialModule (a.k.a. RootModule).
 ///
@@ -38,6 +39,7 @@ class AppWidget extends StatelessWidget {
       // Add Modular to manage the routing system
       navigatorKey: Modular.navigatorKey,
       onGenerateRoute: Modular.generateRoute,
+      theme: basicTheme(),
     );
   }
 }
