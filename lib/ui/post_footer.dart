@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:modular_posts/utils/rand_int.dart';
 
 class PostFooter extends StatefulWidget {
   @override
@@ -12,16 +15,20 @@ class _PostFooterState extends State<PostFooter> {
       mainAxisSize: MainAxisSize.max,
       alignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        IconButton(
+        FlatButton.icon(
           onPressed: () {},
-          icon: Icon(Icons.favorite_border),
-          color: Colors.red,
-          tooltip: 'Favoritar',
+          icon: Icon(Icons.favorite_border, color: Colors.red),
+          label: Text(
+            rand(42),
+            style: TextStyle(color: Colors.red),
+          ),
         ),
         FlatButton.icon(
           onPressed: () {},
           icon: Icon(Icons.comment),
-          label: Text('Comentários'),
+          label: Text(
+            Random().nextInt(42).toString(), // Do not apply zero padding
+          ),
         ),
       ],
     );

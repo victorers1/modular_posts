@@ -4,6 +4,8 @@ import 'package:modular_posts/utils/capitalize.dart';
 import 'package:modular_posts/utils/pad.dart';
 import 'dart:math';
 
+import 'package:modular_posts/utils/rand_int.dart';
+
 class Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,10 @@ class Post extends StatelessWidget {
                 children: <Widget>[
                   CircleAvatar(radius: 25),
                   SizedBox(height: 16),
-                  Text('Jul ${(Random().nextInt(31) + 1).pad}',
+                  Text('Jul ${rand(31)}',
                       style: Theme.of(context).textTheme.caption),
                   SizedBox(height: 4),
-                  Text(
-                      '${(Random().nextInt(23) + 1).pad}:${(Random().nextInt(59) + 1).pad}',
+                  Text('${rand(23)}:${rand(59)}',
                       style: Theme.of(context).textTheme.caption),
                 ],
               ),
