@@ -65,4 +65,4 @@ A new Flutter project using Dio, Modular w/ MobX to show posts provided by [JSON
 - `ui/`: custom widgets
 - `services/`: APIs services
 - `pages/`: app screens
-- `utils/`: others useful codes
+- `utils/`: other useful codes
