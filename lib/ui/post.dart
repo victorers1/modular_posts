@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:modular_posts/ui/post_footer.dart';
 import 'package:modular_posts/utils/capitalize.dart';
+import 'package:modular_posts/utils/pad.dart';
+import 'dart:math';
 
 class Post extends StatelessWidget {
   @override
@@ -13,9 +15,19 @@ class Post extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: CircleAvatar(
-                radius: 25,
+              padding: const EdgeInsets.only(right: 16, bottom: 16),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CircleAvatar(radius: 25),
+                  SizedBox(height: 16),
+                  Text('Jul ${(Random().nextInt(31) + 1).pad}',
+                      style: Theme.of(context).textTheme.caption),
+                  SizedBox(height: 4),
+                  Text(
+                      '${(Random().nextInt(23) + 1).pad}:${(Random().nextInt(59) + 1).pad}',
+                      style: Theme.of(context).textTheme.caption),
+                ],
               ),
             ),
             Expanded(
@@ -24,19 +36,17 @@ class Post extends StatelessWidget {
                     MainAxisAlignment.start, // TODO: test stretch
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'
-                          .capitalize(),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
+                  Text(
+                    'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'
+                        .capitalize,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline5,
                   ),
+                  SizedBox(height: 8),
                   Text(
                     'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
-                        .capitalize(),
+                        .capitalize,
                     maxLines: 15,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyText2,
