@@ -12,15 +12,37 @@ mixin _$FeedController on _FeedControllerBase, Store {
   final _$getUsersAsyncAction = AsyncAction('_FeedControllerBase.getUsers');
 
   @override
-  Future<List<User>> getUsers() {
+  Future<bool> getUsers() {
     return _$getUsersAsyncAction.run(() => super.getUsers());
   }
 
-  final _$getPostAsyncAction = AsyncAction('_FeedControllerBase.getPost');
+  final _$getPostsAsyncAction = AsyncAction('_FeedControllerBase.getPosts');
 
   @override
-  Future<List<Post>> getPost() {
-    return _$getPostAsyncAction.run(() => super.getPost());
+  Future<bool> getPosts(int userID) {
+    return _$getPostsAsyncAction.run(() => super.getPosts(userID));
+  }
+
+  final _$getCommentsAsyncAction =
+      AsyncAction('_FeedControllerBase.getComments');
+
+  @override
+  Future<bool> getComments(PostModel p) {
+    return _$getCommentsAsyncAction.run(() => super.getComments(p));
+  }
+
+  final _$_FeedControllerBaseActionController =
+      ActionController(name: '_FeedControllerBase');
+
+  @override
+  void likePost(int index) {
+    final _$actionInfo = _$_FeedControllerBaseActionController.startAction(
+        name: '_FeedControllerBase.likePost');
+    try {
+      return super.likePost(index);
+    } finally {
+      _$_FeedControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

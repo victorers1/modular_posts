@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   int id;
   String name;
   String username;
@@ -8,7 +8,7 @@ class User {
   String website;
   Company company;
 
-  User(
+  UserModel(
       {this.id,
       this.name,
       this.username,
@@ -18,7 +18,7 @@ class User {
       this.website,
       this.company});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     username = json['username'];

@@ -1,14 +1,23 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:modular_posts/utils/rand_int.dart';
 
-class PostFooter extends StatefulWidget {
-  @override
-  _PostFooterState createState() => _PostFooterState();
-}
+/// Post Footer
+///
+/// Contains single post controller buttons (e.g. like and see comments).
+/// Notifies parent widget if any button was pressed through VoidCallbacks.
+class PostFooter extends StatelessWidget {
+  final int likes;
+  final int comments;
+  final bool liked;
+  final VoidCallback onLikePressed;
+  final VoidCallback onCommentPressed;
 
-class _PostFooterState extends State<PostFooter> {
+  PostFooter({
+    @required this.likes,
+    @required this.comments,
+    this.onLikePressed,
+    this.onCommentPressed,
+    this.liked = false,
+  });
   @override
   Widget build(BuildContext context) {
     return ButtonBar(
@@ -16,18 +25,22 @@ class _PostFooterState extends State<PostFooter> {
       alignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         FlatButton.icon(
-          onPressed: () {},
-          icon: Icon(Icons.favorite_border, color: Colors.red),
+          onPressed: onLikePressed,
+          icon: Icon(
+            liked ? Icons.favorite : Icons.favorite_border,
+            color: Colors.red,
+          ),
           label: Text(
-            rand(42),
+            likes.toString(),
             style: TextStyle(color: Colors.red),
           ),
+          splashColor: Colors.red[50],
         ),
         FlatButton.icon(
-          onPressed: () {},
+          onPressed: onCommentPressed,
           icon: Icon(Icons.comment),
           label: Text(
-            Random().nextInt(42).toString(), // Do not apply zero padding
+            comments.toString(),
           ),
         ),
       ],

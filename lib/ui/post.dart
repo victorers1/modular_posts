@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:modular_posts/models/post.dart';
 import 'package:modular_posts/ui/post_footer.dart';
 import 'package:modular_posts/utils/capitalize.dart';
-import 'package:modular_posts/utils/pad.dart';
-import 'dart:math';
 
-import 'package:modular_posts/utils/rand_int.dart';
+class PostWidget extends StatefulWidget {
+  final PostModel post;
+  final Function getComments;
 
-class Post extends StatelessWidget {
+  PostWidget({@required this.post, @required this.getComments});
+  @override
+  _PostState createState() => _PostState();
+}
+
+// TODO: show original poster name
+class _PostState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,14 +26,13 @@ class Post extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 16, bottom: 16),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   CircleAvatar(radius: 25),
                   SizedBox(height: 16),
-                  Text('Jul ${rand(31)}',
+                  Text(widget.post.date,
                       style: Theme.of(context).textTheme.caption),
                   SizedBox(height: 4),
-                  Text('${rand(23)}:${rand(59)}',
+                  Text(widget.post.time,
                       style: Theme.of(context).textTheme.caption),
                 ],
               ),
@@ -38,21 +44,43 @@ class Post extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'
-                        .capitalize,
+                    widget.post.title.capitalize,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
-                        .capitalize,
+                    widget.post.body.capitalize,
                     maxLines: 15,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
-                  PostFooter(),
+                  FutureBuilder(
+                      // Could be a StreamBuilder
+                      future: widget.getComments(widget.post),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return PostFooter(
+                              likes: widget.post.likes,
+                              comments: 0,
+                            );
+                            break;
+                          default:
+                            if (snapshot.hasError)
+                              return PostFooter(
+                                likes: 0,
+                                comments: 0,
+                              );
+                            else
+                              return PostFooter(
+                                  likes: widget.post.likes,
+                                  comments: widget.post.comments.length,
+                                  liked: widget.post.like);
+                        }
+                      })
                 ],
               ),
             )
