@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:modular_posts/models/comment.dart';
 import 'package:modular_posts/models/post.dart';
 import 'package:modular_posts/models/user.dart';
-import 'package:modular_posts/services/feed.dart';
+import 'package:modular_posts/services/feed_service.dart';
 part 'feed.g.dart';
 
 class FeedController = _FeedControllerBase with _$FeedController;
@@ -22,13 +22,18 @@ abstract class _FeedControllerBase with Store {
   get users => _users;
 
   @action
+  void likePost(int index) {
+    _posts[index].like = _posts[index].like;
+  }
+
+  @action
   Future<bool> getUsers() async {
     print('on FeedController > getUsers()'); // TODO: remove
     try {
       List<dynamic> usersJson = await feedService.getUsers();
       _users = usersJson.map((u) => UserModel.fromJson(u)).toList();
     } on DioError catch (e) {
-      print('onFeedController > getUsers > ${e.message}');
+      print('onFeedController > getUsers() > ${e.message}');
       return false;
     }
     return true;

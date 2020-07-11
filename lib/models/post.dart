@@ -3,6 +3,7 @@ import 'package:modular_posts/models/comment.dart';
 import 'package:modular_posts/utils/rand_int.dart';
 
 class PostModel {
+  // JSON members
   int userId;
   int id;
   String title;
@@ -12,6 +13,7 @@ class PostModel {
   String date;
   String time;
   int likes;
+  bool like;
   List<CommentModel> comments;
 
   PostModel({this.userId, this.id, this.title, this.body});
@@ -25,6 +27,7 @@ class PostModel {
     date = 'Jul ${rand(31)}';
     time = '${rand(23)}:${rand(59)}';
     likes = Random().nextInt(42);
+    like = false;
     comments = [];
   }
 

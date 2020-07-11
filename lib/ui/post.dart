@@ -12,6 +12,7 @@ class PostWidget extends StatefulWidget {
   _PostState createState() => _PostState();
 }
 
+// TODO: show original poster name
 class _PostState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class _PostState extends State<PostWidget> {
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
                   FutureBuilder(
+                      // Could be a StreamBuilder
                       future: widget.getComments(widget.post),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
@@ -74,9 +76,9 @@ class _PostState extends State<PostWidget> {
                               );
                             else
                               return PostFooter(
-                                likes: widget.post.likes,
-                                comments: widget.post.comments.length,
-                              );
+                                  likes: widget.post.likes,
+                                  comments: widget.post.comments.length,
+                                  liked: widget.post.like);
                         }
                       })
                 ],
