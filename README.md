@@ -32,11 +32,10 @@ A new Flutter project using Dio, Modular w/ MobX to show posts provided by [JSON
    [✓] Connected device (1 available)
 
    • No issues found!
-
    ```
 
 ---
-**Note** : all of these versions numbers may differ from yours.
+**Note** : all these versions numbers may differ from yours.
 
 ---
 

@@ -4,9 +4,10 @@ import 'package:modular_posts/ui/post_footer.dart';
 import 'package:modular_posts/utils/capitalize.dart';
 
 class PostWidget extends StatefulWidget {
-  final PostModel p;
+  final PostModel post;
+  final Function getComments;
 
-  PostWidget(this.p);
+  PostWidget({@required this.post, @required this.getComments});
   @override
   _PostState createState() => _PostState();
 }
@@ -27,10 +28,10 @@ class _PostState extends State<PostWidget> {
                 children: <Widget>[
                   CircleAvatar(radius: 25),
                   SizedBox(height: 16),
-                  Text(widget.p.date,
+                  Text(widget.post.date,
                       style: Theme.of(context).textTheme.caption),
                   SizedBox(height: 4),
-                  Text(widget.p.time,
+                  Text(widget.post.time,
                       style: Theme.of(context).textTheme.caption),
                 ],
               ),
@@ -42,22 +43,42 @@ class _PostState extends State<PostWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    widget.p.title.capitalize,
+                    widget.post.title.capitalize,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 8),
                   Text(
-                    widget.p.body.capitalize,
+                    widget.post.body.capitalize,
                     maxLines: 15,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
-                  PostFooter(
-                    likes: widget.p.likes,
-                    comments: widget.p.comments.length,
-                  ),
+                  FutureBuilder(
+                      future: widget.getComments(widget.post),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.none:
+                          case ConnectionState.waiting:
+                            return PostFooter(
+                              likes: widget.post.likes,
+                              comments: 0,
+                            );
+                            break;
+                          default:
+                            if (snapshot.hasError)
+                              return PostFooter(
+                                likes: 0,
+                                comments: 0,
+                              );
+                            else
+                              return PostFooter(
+                                likes: widget.post.likes,
+                                comments: widget.post.comments.length,
+                              );
+                        }
+                      })
                 ],
               ),
             )

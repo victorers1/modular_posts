@@ -23,9 +23,8 @@ class FeedService {
   );
 
   Future<List<dynamic>> getUsers() async {
-    print('on FeedService: getUsers()'); // TODO: remove
+    print('on FeedService > getUsers()'); // TODO: remove
     Response resp;
-
     try {
       resp = await dio.get('/users');
     } on DioError {
@@ -33,20 +32,29 @@ class FeedService {
       // that falls out of the range of 2xx and is also not 304.
       rethrow;
     }
-
     return resp.data;
   }
 
   Future<List<dynamic>> getPosts(int userID) async {
-    print('on FeedService: getPosts($userID)'); // TODO: remove
+    print('on FeedService > getPosts($userID)'); // TODO: remove
     Response resp;
-
     try {
       resp = await dio.get(userID == null ? '/posts' : '/posts?userID=$userID');
     } on DioError {
       rethrow;
     }
+    return resp.data;
+  }
 
+  Future<List<dynamic>> getComments(int postId) async {
+    print('on FeedService > getComments($postId)'); // TODO: remove
+    Response resp;
+    try {
+      resp = await dio
+          .get(postId == null ? '/comments' : '/comments?postId=$postId');
+    } on DioError {
+      rethrow;
+    }
     return resp.data;
   }
 }

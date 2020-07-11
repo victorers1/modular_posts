@@ -28,8 +28,8 @@ class _FeedState extends State<Feed> {
                 return Container(
                   color: Colors.white,
                   child: Center(
-                    child:
-                        CircularProgressIndicator(backgroundColor: Colors.grey),
+                    child: CircularProgressIndicator(
+                        backgroundColor: Colors.grey[300]),
                   ),
                 );
                 break;
@@ -43,7 +43,10 @@ class _FeedState extends State<Feed> {
                         return Container(
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: PostWidget(feedController.posts[index]),
+                          child: PostWidget(
+                            post: feedController.posts[index],
+                            getComments: feedController.getComments,
+                          ),
                         );
                       });
             }
@@ -51,7 +54,3 @@ class _FeedState extends State<Feed> {
     );
   }
 }
-
-/**
- * 
- */

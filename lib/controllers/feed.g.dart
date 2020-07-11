@@ -23,6 +23,14 @@ mixin _$FeedController on _FeedControllerBase, Store {
     return _$getPostsAsyncAction.run(() => super.getPosts(userID));
   }
 
+  final _$getCommentsAsyncAction =
+      AsyncAction('_FeedControllerBase.getComments');
+
+  @override
+  Future<bool> getComments(PostModel p) {
+    return _$getCommentsAsyncAction.run(() => super.getComments(p));
+  }
+
   @override
   String toString() {
     return '''
