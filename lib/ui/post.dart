@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:modular_posts/models/post.dart';
 import 'package:modular_posts/ui/post_footer.dart';
 import 'package:modular_posts/utils/capitalize.dart';
-import 'package:modular_posts/utils/pad.dart';
-import 'dart:math';
 
-import 'package:modular_posts/utils/rand_int.dart';
+class PostWidget extends StatefulWidget {
+  final PostModel p;
 
-class Post extends StatelessWidget {
+  PostWidget(this.p);
+  @override
+  _PostState createState() => _PostState();
+}
+
+class _PostState extends State<PostWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,14 +24,13 @@ class Post extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 16, bottom: 16),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   CircleAvatar(radius: 25),
                   SizedBox(height: 16),
-                  Text('Jul ${rand(31)}',
+                  Text(widget.p.date,
                       style: Theme.of(context).textTheme.caption),
                   SizedBox(height: 4),
-                  Text('${rand(23)}:${rand(59)}',
+                  Text(widget.p.time,
                       style: Theme.of(context).textTheme.caption),
                 ],
               ),
@@ -38,21 +42,22 @@ class Post extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'
-                        .capitalize,
+                    widget.p.title.capitalize,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
-                        .capitalize,
+                    widget.p.body.capitalize,
                     maxLines: 15,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyText2,
                   ),
-                  PostFooter(),
+                  PostFooter(
+                    likes: widget.p.likes,
+                    comments: widget.p.comments.length,
+                  ),
                 ],
               ),
             )

@@ -38,12 +38,12 @@ class FeedService {
   }
 
   Future<List<dynamic>> getPosts(int userID) async {
-    print('on FeedService: getPosts()'); // TODO: remove
+    print('on FeedService: getPosts($userID)'); // TODO: remove
     Response resp;
 
     try {
-      resp = await dio.get(userID != null ? '/posts' : 'posts?userID=$userID');
-    } on DioError catch (e) {
+      resp = await dio.get(userID == null ? '/posts' : '/posts?userID=$userID');
+    } on DioError {
       rethrow;
     }
 

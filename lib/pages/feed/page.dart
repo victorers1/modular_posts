@@ -3,34 +3,55 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_posts/controllers/feed.dart';
 import 'package:modular_posts/ui/post.dart';
 
-class Feed extends StatelessWidget {
+class Feed extends StatefulWidget {
+  @override
+  _FeedState createState() => _FeedState();
+}
+
+class _FeedState extends State<Feed> {
   final feedController = Modular.get<FeedController>();
+
+  Future getFeed() async {
+    await feedController.getUsers();
+    await feedController.getPosts(null);
+  }
 
   @override
   Widget build(BuildContext context) {
-    feedController.getUsers();
-
     return Scaffold(
-      body: ListView(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Post(),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Post(),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Post(),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Post(),
-          ),
-        ],
-      ),
+      body: FutureBuilder(
+          future: getFeed(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+              case ConnectionState.none:
+                return Container(
+                  color: Colors.white,
+                  child: Center(
+                    child:
+                        CircularProgressIndicator(backgroundColor: Colors.grey),
+                  ),
+                );
+                break;
+              default:
+                if (snapshot.hasError)
+                  return Container();
+                else
+                  return ListView.builder(
+                      itemCount: feedController.posts.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          child: PostWidget(feedController.posts[index]),
+                        );
+                      });
+            }
+          }),
     );
   }
 }
+
+/**
+ * 
+ */
