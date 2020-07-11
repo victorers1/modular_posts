@@ -9,6 +9,14 @@ part of 'post_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PostController on _PostControllerBase, Store {
+  Computed<PostModel> _$postComputed;
+
+  @override
+  PostModel get post =>
+      (_$postComputed ??= Computed<PostModel>(() => super.post,
+              name: '_PostControllerBase.post'))
+          .value;
+
   final _$getCommentsAsyncAction =
       AsyncAction('_PostControllerBase.getComments');
 
@@ -111,7 +119,7 @@ mixin _$PostController on _PostControllerBase, Store {
   @override
   String toString() {
     return '''
-
+post: ${post}
     ''';
   }
 }

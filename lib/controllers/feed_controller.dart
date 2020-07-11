@@ -18,7 +18,9 @@ abstract class _FeedControllerBase with Store {
 
   final feedService = FeedService(); // Responsable for network requests
 
+  @computed
   get posts => _posts;
+  @computed
   get users => _users;
 
   @action

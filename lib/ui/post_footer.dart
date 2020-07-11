@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class PostFooter extends StatelessWidget {
   final int likes;
   final int comments;
-  final bool liked;
+  final bool isLiked;
   final VoidCallback onLikePressed;
   final VoidCallback onCommentPressed;
 
@@ -16,10 +16,11 @@ class PostFooter extends StatelessWidget {
     @required this.comments,
     this.onLikePressed,
     this.onCommentPressed,
-    this.liked = false,
+    this.isLiked = false,
   });
   @override
   Widget build(BuildContext context) {
+    print('building post footer');
     return ButtonBar(
       mainAxisSize: MainAxisSize.max,
       alignment: MainAxisAlignment.spaceEvenly,
@@ -27,7 +28,7 @@ class PostFooter extends StatelessWidget {
         FlatButton.icon(
           onPressed: onLikePressed,
           icon: Icon(
-            liked ? Icons.favorite : Icons.favorite_border,
+            isLiked ? Icons.favorite : Icons.favorite_border,
             color: Colors.red,
           ),
           label: Text(

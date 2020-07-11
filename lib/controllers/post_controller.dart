@@ -19,6 +19,7 @@ abstract class _PostControllerBase with Store {
 
   final postService = PostService();
 
+  @computed
   PostModel get post => _post;
 
   @action
@@ -39,8 +40,8 @@ abstract class _PostControllerBase with Store {
   @action
   Future<bool> getComments() async {
     try {
-      List<dynamic> commentsJson = await postService.getComments(post.id);
-      post.comments =
+      List<dynamic> commentsJson = await postService.getComments(_post.id);
+      _post.comments =
           commentsJson.map((c) => CommentModel.fromJson(c)).toList();
       // print('${p.comments.length}');
     } on DioError catch (e) {
@@ -51,5 +52,13 @@ abstract class _PostControllerBase with Store {
   }
 
   @action
-  like() => _post.like = !_post.like;
+  like() {
+    if (_post.like)
+      _post.likes--;
+    else
+      _post.likes++;
+
+    _post.like = !_post.like;
+    print('post have ${_post.likes} likes');
+  }
 }
