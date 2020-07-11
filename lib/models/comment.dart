@@ -1,13 +1,13 @@
-class Comment {
+class CommentModel {
   int postId;
   int id;
   String name;
   String email;
   String body;
 
-  Comment({this.postId, this.id, this.name, this.email, this.body});
+  CommentModel({this.postId, this.id, this.name, this.email, this.body});
 
-  Comment.fromJson(Map<String, dynamic> json) {
+  CommentModel.fromJson(Map<String, dynamic> json) {
     postId = json['postId'];
     id = json['id'];
     name = json['name'];
