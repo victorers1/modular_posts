@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feed.dart';
+part of 'feed_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -9,6 +9,19 @@ part of 'feed.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$FeedController on _FeedControllerBase, Store {
+  Computed<dynamic> _$postsComputed;
+
+  @override
+  dynamic get posts => (_$postsComputed ??= Computed<dynamic>(() => super.posts,
+          name: '_FeedControllerBase.posts'))
+      .value;
+  Computed<dynamic> _$usersComputed;
+
+  @override
+  dynamic get users => (_$usersComputed ??= Computed<dynamic>(() => super.users,
+          name: '_FeedControllerBase.users'))
+      .value;
+
   final _$getUsersAsyncAction = AsyncAction('_FeedControllerBase.getUsers');
 
   @override
@@ -31,24 +44,11 @@ mixin _$FeedController on _FeedControllerBase, Store {
     return _$getCommentsAsyncAction.run(() => super.getComments(p));
   }
 
-  final _$_FeedControllerBaseActionController =
-      ActionController(name: '_FeedControllerBase');
-
-  @override
-  void likePost(int index) {
-    final _$actionInfo = _$_FeedControllerBaseActionController.startAction(
-        name: '_FeedControllerBase.likePost');
-    try {
-      return super.likePost(index);
-    } finally {
-      _$_FeedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-
+posts: ${posts},
+users: ${users}
     ''';
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_posts/controllers/tabs.dart';
-import 'package:modular_posts/pages/feed/module.dart';
-import 'package:modular_posts/pages/profile/module.dart';
+import 'package:modular_posts/controllers/tabs_controller.dart';
+import 'package:modular_posts/pages/feed/feed_module.dart';
+import 'package:modular_posts/pages/profile/profile_module.dart';
 
 class TabsPage extends StatefulWidget {
   @override

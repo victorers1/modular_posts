@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_posts/controllers/tabs.dart';
+import 'package:modular_posts/controllers/tabs_controller.dart';
 import 'package:modular_posts/pages/intro.dart';
 import 'package:modular_posts/pages/tabs.dart';
 import 'package:modular_posts/theme.dart';

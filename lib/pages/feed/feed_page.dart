@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:modular_posts/controllers/feed.dart';
+import 'package:modular_posts/controllers/feed_controller.dart';
 import 'package:modular_posts/ui/post.dart';
 
 class Feed extends StatefulWidget {
@@ -44,8 +44,7 @@ class _FeedState extends State<Feed> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: PostWidget(
-                            post: feedController.posts[index],
-                            getComments: feedController.getComments,
+                            postController: feedController.posts[index],
                           ),
                         );
                       });
