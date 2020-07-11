@@ -52,17 +52,19 @@ A new Flutter project using Dio, Modular w/ MobX to show posts provided by [JSON
     - ui/
     - services/
     - pages/
-        - all/
-        - customer/
-        - partner/
+        - feed/
+        - profile/
     - utils/
 - main.dart
+- theme.dart
 ```
 
 - `controllers/`: MobX controllers
-- `models/`: model's classes
+- `models/`: global classes
 - `modules/`: modular declaration files
 - `ui/`: custom widgets
 - `services/`: APIs services
 - `pages/`: app screens
+- `pages/feed/`: first tab, shows posts
+- `pages/profile/`: second tab, shows user's account info
 - `utils/`: other useful codes
