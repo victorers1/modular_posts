@@ -31,20 +31,6 @@ mixin _$FeedController on _FeedControllerBase, Store {
     return _$getCommentsAsyncAction.run(() => super.getComments(p));
   }
 
-  final _$_FeedControllerBaseActionController =
-      ActionController(name: '_FeedControllerBase');
-
-  @override
-  void likePost(int index) {
-    final _$actionInfo = _$_FeedControllerBaseActionController.startAction(
-        name: '_FeedControllerBase.likePost');
-    try {
-      return super.likePost(index);
-    } finally {
-      _$_FeedControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

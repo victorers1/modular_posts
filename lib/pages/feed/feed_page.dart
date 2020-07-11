@@ -44,8 +44,7 @@ class _FeedState extends State<Feed> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: PostWidget(
-                            post: feedController.posts[index],
-                            getComments: feedController.getComments,
+                            postController: feedController.posts[index],
                           ),
                         );
                       });

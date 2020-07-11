@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-part 'tabs.g.dart';
+part 'tabs_controller.g.dart';
 
 class TabsController = _TabsControllerBase with _$TabsController;
 

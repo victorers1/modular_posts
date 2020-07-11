@@ -1,30 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
+import 'package:modular_posts/controllers/post_controller.dart';
 import 'package:modular_posts/models/comment.dart';
 import 'package:modular_posts/models/post.dart';
 import 'package:modular_posts/models/user.dart';
 import 'package:modular_posts/services/feed_service.dart';
-part 'feed.g.dart';
+part 'feed_controller.g.dart';
 
 class FeedController = _FeedControllerBase with _$FeedController;
 
 /// FeedController
 ///
-/// Responsable for managing feed related entities (Posts, Comments). Actually
-/// it's the only class capable of doing so.
+/// Responsable for managing feed related entities (PostsControllers, Comments).
 abstract class _FeedControllerBase with Store {
   List<UserModel> _users = [];
-  List<PostModel> _posts = [];
+  List<PostController> _posts = [];
 
   final feedService = FeedService(); // Responsable for network requests
 
   get posts => _posts;
   get users => _users;
-
-  @action
-  void likePost(int index) {
-    _posts[index].like = _posts[index].like;
-  }
 
   @action
   Future<bool> getUsers() async {
@@ -44,7 +39,7 @@ abstract class _FeedControllerBase with Store {
     print('on FeedController > getUsers()'); // TODO: remove
     try {
       List<dynamic> postsJson = await feedService.getPosts(userID);
-      _posts = postsJson.map((p) => PostModel.fromJson(p)).toList();
+      _posts = postsJson.map((p) => PostController.fromJson(p)).toList();
     } on DioError catch (e) {
       print('onFeedController > getPosts > ${e.message}');
       return false;
