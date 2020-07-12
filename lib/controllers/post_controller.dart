@@ -71,8 +71,6 @@ abstract class _PostControllerBase with Store {
   @action
   like() {
     _post.likes += _post.like ? -1 : 1;
-
     _post.like = !_post.like;
-    print('post have ${_post.likes} likes'); // TODO: remove
   }
 }

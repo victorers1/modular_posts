@@ -27,54 +27,52 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Detalhes')),
-      body: Container(
-        margin: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: <Widget>[
-            FutureBuilder(
-                future: postCtrl.getUser(postCtrl.post.userId),
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.waiting:
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: <Widget>[
+          FutureBuilder(
+              future: postCtrl.getUser(postCtrl.post.userId),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return UserTile(
+                      name: 'Carregando...',
+                      email: 'Carregando...',
+                    );
+                    break;
+                  default:
+                    if (snapshot.hasError)
                       return UserTile(
-                        name: 'Carregando...',
-                        email: 'Carregando...',
+                        name: 'Ops!',
+                        email: 'Houve um erro',
                       );
-                      break;
-                    default:
-                      if (snapshot.hasError)
-                        return UserTile(
-                          name: 'Ops!',
-                          email: 'Houve um erro',
-                        );
-                      else
-                        return UserTile(
-                          name: postCtrl.post.user.name,
-                          email: postCtrl.post.user.email,
-                          userID: postCtrl.post.userId,
-                        );
-                  }
-                }),
-            SizedBox(height: 20),
-            Text(
-              postCtrl.post.title.capitalize,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.justify,
-            ),
-            SizedBox(height: 20),
-            Text(
-              postCtrl.post.body.capitalize,
-              style: Theme.of(context).textTheme.bodyText2,
-              textAlign: TextAlign.justify,
-            ),
-            Divider(height: 50),
-            CommentSection(postCtrl: postCtrl)
-          ],
-        ),
+                    else
+                      return UserTile(
+                        name: postCtrl.post.user.name,
+                        email: postCtrl.post.user.email,
+                        userID: postCtrl.post.userId,
+                      );
+                }
+              }),
+          SizedBox(height: 20),
+          Text(
+            postCtrl.post.title.capitalize,
+            style: Theme.of(context)
+                .textTheme
+                .headline5
+                .copyWith(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 20),
+          Text(
+            postCtrl.post.body.capitalize,
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.justify,
+          ),
+          Divider(height: 50),
+          CommentSection(postCtrl: postCtrl)
+        ],
       ),
     );
   }

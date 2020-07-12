@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
 import 'package:modular_posts/ui/post_footer.dart';
 import 'package:modular_posts/ui/user_avatar.dart';
@@ -15,6 +14,12 @@ class PostWidget extends StatefulWidget {
 
 // TODO: show original poster name
 class _PostState extends State<PostWidget> {
+  onLikePressed() {
+    setState(() {
+      widget.postController.like();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -74,9 +79,11 @@ class _PostState extends State<PostWidget> {
                           case ConnectionState.none:
                           case ConnectionState.waiting:
                             return PostFooter(
-                              likes: 0, // widget.postController.post.likes,
-                              comments: 0,
-                              // VoidCallbacks are null => button disabled
+                              likes: widget.postController.post.likes,
+                              comments:
+                                  widget.postController.post.comments.length,
+                              onLikePressed: () {},
+                              onCommentPressed: () {},
                             );
                             break;
                           default:
@@ -84,23 +91,20 @@ class _PostState extends State<PostWidget> {
                               return PostFooter(
                                 likes: 0,
                                 comments: 0,
+                                // Null VoidCallbacks => button disabled
                               );
                             else
-                              return Observer(builder: (context) {
-                                print(
-                                    'liking post ${widget.postController.post.id}');
-                                return PostFooter(
-                                  likes: widget.postController.post.likes,
-                                  comments: widget
-                                      .postController.post.comments.length,
-                                  isLiked: widget.postController.post.like,
-                                  onLikePressed: widget.postController.like,
-                                  onCommentPressed: () {
-                                    Navigator.of(context).pushNamed('/details',
-                                        arguments: widget.postController);
-                                  },
-                                );
-                              });
+                              return PostFooter(
+                                likes: widget.postController.post.likes,
+                                comments:
+                                    widget.postController.post.comments.length,
+                                isLiked: widget.postController.post.like,
+                                onLikePressed: onLikePressed,
+                                onCommentPressed: () {
+                                  Navigator.of(context).pushNamed('/details',
+                                      arguments: widget.postController);
+                                },
+                              );
                         }
                       })
                 ],

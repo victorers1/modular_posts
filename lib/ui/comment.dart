@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:modular_posts/models/comment.dart';
 
+/// Comment Widget
+///
+/// Shows email and comment message. Comment API has no author ID.
 class CommentWidget extends StatefulWidget {
   final CommentModel comment;
-
   CommentWidget({@required this.comment});
 
   @override
@@ -21,7 +23,7 @@ class _CommentWidgetState extends State<CommentWidget> {
     return ListTile(
       dense: true,
       contentPadding: EdgeInsets.zero,
-      // Comment API has no author ID
+
       // leading: CircleAvatar(
       //     radius: 10,
       //     backgroundImage:
