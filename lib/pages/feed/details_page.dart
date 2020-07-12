@@ -61,10 +61,18 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         );
                   }
                 }),
-            Text(postCtrl.post.title,
-                style: Theme.of(context).textTheme.headline5),
-            Text(postCtrl.post.body,
-                style: Theme.of(context).textTheme.bodyText2),
+            SizedBox(height: 20),
+            Text(
+              postCtrl.post.title,
+              style: Theme.of(context).textTheme.headline5,
+              textAlign: TextAlign.justify,
+            ),
+            SizedBox(height: 20),
+            Text(
+              postCtrl.post.body,
+              style: Theme.of(context).textTheme.bodyText2,
+              textAlign: TextAlign.justify,
+            ),
           ],
         ),
       ),
