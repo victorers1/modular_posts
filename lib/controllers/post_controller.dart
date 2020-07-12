@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modular_posts/models/comment.dart';
 import 'package:modular_posts/models/post.dart';
+import 'package:modular_posts/models/user.dart';
 import 'package:modular_posts/services/post_service.dart';
 part 'post_controller.g.dart';
 
@@ -9,10 +10,11 @@ class PostController = _PostControllerBase with _$PostController;
 
 /// Post Controller
 ///
-/// Responsable for managing a specific Post.
+/// Responsable for managing a specific Post (content, user, comments etc).
 abstract class _PostControllerBase with Store {
   PostModel _post = PostModel();
 
+  _PostControllerBase();
   _PostControllerBase.fromJson(Map<String, dynamic> json) {
     _post = PostModel.fromJson(json);
   }
@@ -52,6 +54,19 @@ abstract class _PostControllerBase with Store {
   }
 
   @action
+  Future<bool> getUser(int id) async {
+    print('on FeedController > getUsers()'); // TODO: remove
+    try {
+      Map<String, dynamic> userJson = await postService.getUser(id);
+      post.user = UserModel.fromJson(userJson);
+    } on DioError catch (e) {
+      print('onFeedController > getUsers() > ${e.message}');
+      return false;
+    }
+    return true;
+  }
+
+  @action
   like() {
     if (_post.like)
       _post.likes--;
@@ -59,6 +74,6 @@ abstract class _PostControllerBase with Store {
       _post.likes++;
 
     _post.like = !_post.like;
-    print('post have ${_post.likes} likes');
+    print('post have ${_post.likes} likes'); // TODO: remove
   }
 }

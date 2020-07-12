@@ -12,7 +12,7 @@ class _FeedState extends State<Feed> {
   final feedController = Modular.get<FeedController>();
 
   Future getFeed() async {
-    await feedController.getUsers();
+    // await feedController.getUsers(null);
     await feedController.getPosts(null);
   }
 
@@ -43,8 +43,16 @@ class _FeedState extends State<Feed> {
                         return Container(
                           padding:
                               EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: PostWidget(
-                            postController: feedController.posts[index],
+                          child: GestureDetector(
+                            onTap: () {
+                              // Modular.to.pushNamed('/details',
+                              //     arguments: feedController.posts[index]);
+                              Navigator.of(context).pushNamed('/details',
+                                  arguments: feedController.posts[index]);
+                            },
+                            child: PostWidget(
+                              postController: feedController.posts[index],
+                            ),
                           ),
                         );
                       });

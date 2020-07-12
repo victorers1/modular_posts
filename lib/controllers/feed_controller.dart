@@ -13,10 +13,12 @@ class FeedController = _FeedControllerBase with _$FeedController;
 ///
 /// Responsable for managing feed related entities (PostsControllers, Comments).
 abstract class _FeedControllerBase with Store {
-  List<UserModel> _users = [];
-  List<PostController> _posts = [];
-
   final feedService = FeedService(); // Responsable for network requests
+
+  @observable
+  ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
+  @observable
+  ObservableList<PostController> _posts = ObservableList<PostController>.of([]);
 
   @computed
   get posts => _posts;
@@ -24,24 +26,12 @@ abstract class _FeedControllerBase with Store {
   get users => _users;
 
   @action
-  Future<bool> getUsers() async {
-    print('on FeedController > getUsers()'); // TODO: remove
-    try {
-      List<dynamic> usersJson = await feedService.getUsers();
-      _users = usersJson.map((u) => UserModel.fromJson(u)).toList();
-    } on DioError catch (e) {
-      print('onFeedController > getUsers() > ${e.message}');
-      return false;
-    }
-    return true;
-  }
-
-  @action
   Future<bool> getPosts(int userID) async {
     print('on FeedController > getUsers()'); // TODO: remove
     try {
       List<dynamic> postsJson = await feedService.getPosts(userID);
-      _posts = postsJson.map((p) => PostController.fromJson(p)).toList();
+      _posts = ObservableList<PostController>.of(
+          postsJson.map((p) => PostController.fromJson(p)).toList());
     } on DioError catch (e) {
       print('onFeedController > getPosts > ${e.message}');
       return false;
@@ -49,19 +39,27 @@ abstract class _FeedControllerBase with Store {
     return true;
   }
 
-  @action
-  Future<bool> getComments(PostModel p) async {
-    // print('on FeedController > getComments()'); // TODO: remove
+  // @action
+  // Future<bool> getComments(PostModel p) async {
+  //   // print('on FeedController > getComments()'); // TODO: remove
 
-    try {
-      List<dynamic> commentsJson = await feedService.getComments(p.id);
-      p.comments = commentsJson.map((c) => CommentModel.fromJson(c)).toList();
-      // print('${p.comments.length}');
-    } on DioError catch (e) {
-      print('onFeedController > getComments > ${e.message}');
-      return false;
-    }
+  //   try {
+  //     List<dynamic> commentsJson = await feedService.getComments(p.id);
+  //     p.comments = commentsJson.map((c) => CommentModel.fromJson(c)).toList();
+  //     // print('${p.comments.length}');
+  //   } on DioError catch (e) {
+  //     print('onFeedController > getComments > ${e.message}');
+  //     return false;
+  //   }
 
-    return true;
-  }
+  //   return true;
+  // }
+
+  // @action
+  // relateUsersToPosts() {
+  //   _posts.forEach((postCtrl) {
+  //     postCtrl.post.user =
+  //         _users[_users.indexWhere((u) => u.id == postCtrl.post.userId)];
+  //   });
+  // }
 }

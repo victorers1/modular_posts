@@ -25,6 +25,13 @@ mixin _$PostController on _PostControllerBase, Store {
     return _$getCommentsAsyncAction.run(() => super.getComments());
   }
 
+  final _$getUserAsyncAction = AsyncAction('_PostControllerBase.getUser');
+
+  @override
+  Future<bool> getUser(int id) {
+    return _$getUserAsyncAction.run(() => super.getUser(id));
+  }
+
   final _$_PostControllerBaseActionController =
       ActionController(name: '_PostControllerBase');
 

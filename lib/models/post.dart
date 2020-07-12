@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:modular_posts/models/comment.dart';
+import 'package:modular_posts/models/user.dart';
 import 'package:modular_posts/utils/rand_int.dart';
 
 class PostModel {
@@ -10,6 +11,7 @@ class PostModel {
   String body;
 
   // Custom members
+  UserModel user;
   String date;
   String time;
   int likes;
@@ -29,6 +31,7 @@ class PostModel {
     likes = Random().nextInt(42);
     like = false;
     comments = [];
+    //user = null;
   }
 
   Map<String, dynamic> toJson() {

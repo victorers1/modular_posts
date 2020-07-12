@@ -22,6 +22,19 @@ class PostService {
     ),
   );
 
+  Future<Map<String, dynamic>> getUser(int id) async {
+    print('on PostService > getUser($id)'); // TODO: remove
+    Response resp;
+    try {
+      resp = await dio.get('/users/$id');
+    } on DioError {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      rethrow;
+    }
+    return resp.data;
+  }
+
   Future<List<dynamic>> getComments(int postId) async {
     print('on PostService > getComments($postId)'); // TODO: remove
     Response resp;

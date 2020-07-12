@@ -22,11 +22,34 @@ mixin _$FeedController on _FeedControllerBase, Store {
           name: '_FeedControllerBase.users'))
       .value;
 
-  final _$getUsersAsyncAction = AsyncAction('_FeedControllerBase.getUsers');
+  final _$_usersAtom = Atom(name: '_FeedControllerBase._users');
 
   @override
-  Future<bool> getUsers() {
-    return _$getUsersAsyncAction.run(() => super.getUsers());
+  ObservableList<UserModel> get _users {
+    _$_usersAtom.reportRead();
+    return super._users;
+  }
+
+  @override
+  set _users(ObservableList<UserModel> value) {
+    _$_usersAtom.reportWrite(value, super._users, () {
+      super._users = value;
+    });
+  }
+
+  final _$_postsAtom = Atom(name: '_FeedControllerBase._posts');
+
+  @override
+  ObservableList<PostController> get _posts {
+    _$_postsAtom.reportRead();
+    return super._posts;
+  }
+
+  @override
+  set _posts(ObservableList<PostController> value) {
+    _$_postsAtom.reportWrite(value, super._posts, () {
+      super._posts = value;
+    });
   }
 
   final _$getPostsAsyncAction = AsyncAction('_FeedControllerBase.getPosts');
@@ -34,14 +57,6 @@ mixin _$FeedController on _FeedControllerBase, Store {
   @override
   Future<bool> getPosts(int userID) {
     return _$getPostsAsyncAction.run(() => super.getPosts(userID));
-  }
-
-  final _$getCommentsAsyncAction =
-      AsyncAction('_FeedControllerBase.getComments');
-
-  @override
-  Future<bool> getComments(PostModel p) {
-    return _$getCommentsAsyncAction.run(() => super.getComments(p));
   }
 
   @override
