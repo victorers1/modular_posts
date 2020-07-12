@@ -16,6 +16,7 @@ dependencies:
   flutter_mobx: ^1.1.0+1 # MobX integration to Flutter
   expandable: ^4.1.4 # Expandable cards
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

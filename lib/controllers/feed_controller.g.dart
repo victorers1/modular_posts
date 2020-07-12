@@ -15,27 +15,6 @@ mixin _$FeedController on _FeedControllerBase, Store {
   dynamic get posts => (_$postsComputed ??= Computed<dynamic>(() => super.posts,
           name: '_FeedControllerBase.posts'))
       .value;
-  Computed<dynamic> _$usersComputed;
-
-  @override
-  dynamic get users => (_$usersComputed ??= Computed<dynamic>(() => super.users,
-          name: '_FeedControllerBase.users'))
-      .value;
-
-  final _$_usersAtom = Atom(name: '_FeedControllerBase._users');
-
-  @override
-  ObservableList<UserModel> get _users {
-    _$_usersAtom.reportRead();
-    return super._users;
-  }
-
-  @override
-  set _users(ObservableList<UserModel> value) {
-    _$_usersAtom.reportWrite(value, super._users, () {
-      super._users = value;
-    });
-  }
 
   final _$_postsAtom = Atom(name: '_FeedControllerBase._posts');
 
@@ -62,8 +41,7 @@ mixin _$FeedController on _FeedControllerBase, Store {
   @override
   String toString() {
     return '''
-posts: ${posts},
-users: ${users}
+posts: ${posts}
     ''';
   }
 }

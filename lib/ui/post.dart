@@ -74,8 +74,9 @@ class _PostState extends State<PostWidget> {
                           case ConnectionState.none:
                           case ConnectionState.waiting:
                             return PostFooter(
-                              likes: widget.postController.post.likes,
+                              likes: 0, // widget.postController.post.likes,
                               comments: 0,
+                              // VoidCallbacks are null => button disabled
                             );
                             break;
                           default:
@@ -94,7 +95,10 @@ class _PostState extends State<PostWidget> {
                                       .postController.post.comments.length,
                                   isLiked: widget.postController.post.like,
                                   onLikePressed: widget.postController.like,
-                                  onCommentPressed: () {},
+                                  onCommentPressed: () {
+                                    Navigator.of(context).pushNamed('/details',
+                                        arguments: widget.postController);
+                                  },
                                 );
                               });
                         }

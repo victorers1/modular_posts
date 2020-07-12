@@ -9,19 +9,15 @@ class FeedController = _FeedControllerBase with _$FeedController;
 
 /// FeedController
 ///
-/// Responsable for managing feed related entities (PostsControllers, Comments).
+/// Responsable for managing feed related entities (PostsControllers).
 abstract class _FeedControllerBase with Store {
   final feedService = FeedService(); // Responsable for network requests
 
-  @observable
-  ObservableList<UserModel> _users = ObservableList<UserModel>.of([]);
   @observable
   ObservableList<PostController> _posts = ObservableList<PostController>.of([]);
 
   @computed
   get posts => _posts;
-  @computed
-  get users => _users;
 
   @action
   Future<bool> getPosts(int userID) async {

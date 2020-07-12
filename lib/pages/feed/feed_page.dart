@@ -12,14 +12,13 @@ class _FeedState extends State<Feed> {
   final feedController = Modular.get<FeedController>();
 
   Future getFeed() async {
-    // await feedController.getUsers(null);
     await feedController.getPosts(null);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Seu Feed')),
+      appBar: AppBar(title: Text('Seu Feed')), //
       body: FutureBuilder(
           future: getFeed(),
           builder: (context, snapshot) {

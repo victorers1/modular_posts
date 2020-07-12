@@ -16,6 +16,13 @@ mixin _$PostController on _PostControllerBase, Store {
       (_$postComputed ??= Computed<PostModel>(() => super.post,
               name: '_PostControllerBase.post'))
           .value;
+  Computed<List<CommentModel>> _$commentsComputed;
+
+  @override
+  List<CommentModel> get comments =>
+      (_$commentsComputed ??= Computed<List<CommentModel>>(() => super.comments,
+              name: '_PostControllerBase.comments'))
+          .value;
 
   final _$getCommentsAsyncAction =
       AsyncAction('_PostControllerBase.getComments');
@@ -126,7 +133,8 @@ mixin _$PostController on _PostControllerBase, Store {
   @override
   String toString() {
     return '''
-post: ${post}
+post: ${post},
+comments: ${comments}
     ''';
   }
 }
