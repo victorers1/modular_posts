@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
+import 'package:modular_posts/ui/user_avatar.dart';
 import 'package:modular_posts/ui/user_info.dart';
 
 class PostDetailsPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                CircleAvatar(radius: 25),
+                UserAvatar(),
                 FutureBuilder(
                     future: getUser(),
                     builder: (context, snapshot) {

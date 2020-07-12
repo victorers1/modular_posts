@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
 import 'package:modular_posts/ui/post_footer.dart';
+import 'package:modular_posts/ui/user_avatar.dart';
 import 'package:modular_posts/utils/capitalize.dart';
 
 class PostWidget extends StatefulWidget {
@@ -27,7 +28,7 @@ class _PostState extends State<PostWidget> {
               padding: const EdgeInsets.only(right: 16, bottom: 16),
               child: Column(
                 children: <Widget>[
-                  CircleAvatar(radius: 25),
+                  UserAvatar(userID: widget.postController.post.userId),
                   SizedBox(height: 16),
                   Text(widget.postController.post.date,
                       style: Theme.of(context).textTheme.caption),
