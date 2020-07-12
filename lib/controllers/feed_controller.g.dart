@@ -15,18 +15,20 @@ mixin _$FeedController on _FeedControllerBase, Store {
   dynamic get posts => (_$postsComputed ??= Computed<dynamic>(() => super.posts,
           name: '_FeedControllerBase.posts'))
       .value;
-  Computed<dynamic> _$usersComputed;
+
+  final _$_postsAtom = Atom(name: '_FeedControllerBase._posts');
 
   @override
-  dynamic get users => (_$usersComputed ??= Computed<dynamic>(() => super.users,
-          name: '_FeedControllerBase.users'))
-      .value;
-
-  final _$getUsersAsyncAction = AsyncAction('_FeedControllerBase.getUsers');
+  ObservableList<PostController> get _posts {
+    _$_postsAtom.reportRead();
+    return super._posts;
+  }
 
   @override
-  Future<bool> getUsers() {
-    return _$getUsersAsyncAction.run(() => super.getUsers());
+  set _posts(ObservableList<PostController> value) {
+    _$_postsAtom.reportWrite(value, super._posts, () {
+      super._posts = value;
+    });
   }
 
   final _$getPostsAsyncAction = AsyncAction('_FeedControllerBase.getPosts');
@@ -36,19 +38,10 @@ mixin _$FeedController on _FeedControllerBase, Store {
     return _$getPostsAsyncAction.run(() => super.getPosts(userID));
   }
 
-  final _$getCommentsAsyncAction =
-      AsyncAction('_FeedControllerBase.getComments');
-
-  @override
-  Future<bool> getComments(PostModel p) {
-    return _$getCommentsAsyncAction.run(() => super.getComments(p));
-  }
-
   @override
   String toString() {
     return '''
-posts: ${posts},
-users: ${users}
+posts: ${posts}
     ''';
   }
 }
