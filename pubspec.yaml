@@ -14,7 +14,6 @@ dependencies:
   flutter_modular: ^1.2.7+1 # Routing and state management
   mobx: ^1.2.1+1 # MobX State management code
   flutter_mobx: ^1.1.0+1 # MobX integration to Flutter
-  expandable: ^4.1.4 # Expandable cards
 
 
 dev_dependencies:
@@ -27,9 +26,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/ # Doesn't work
+    - assets/ # Not working
     - assets/img/profile.png
-  #   - images/a_dot_ham.jpeg
 
   # fonts:
   #   - family: Schyler
