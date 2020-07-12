@@ -36,7 +36,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                UserAvatar(),
+                UserAvatar(
+                  userID: postCtrl.post.userId,
+                ),
                 FutureBuilder(
                     future: getUser(),
                     builder: (context, snapshot) {
