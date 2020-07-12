@@ -5,6 +5,7 @@ import 'package:modular_posts/ui/comment.dart';
 import 'package:modular_posts/ui/comment_section.dart';
 import 'package:modular_posts/ui/user_tile.dart';
 import 'package:modular_posts/utils/capitalize.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final PostController postController;
@@ -36,10 +37,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
-                    return UserTile(
-                      name: 'Carregando...',
-                      email: 'Carregando...',
-                    );
+                    return UserTileShimmer();
                     break;
                   default:
                     if (snapshot.hasError)
