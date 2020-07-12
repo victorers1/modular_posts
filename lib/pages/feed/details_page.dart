@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
-import 'package:modular_posts/ui/user_avatar.dart';
-import 'package:modular_posts/ui/user_info.dart';
+import 'package:modular_posts/ui/user_tile.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final PostController postController;
@@ -30,43 +29,42 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Detalhes')),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                UserAvatar(
-                  userID: postCtrl.post.userId,
-                ),
-                FutureBuilder(
-                    future: getUser(),
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                          return UserInfo(
-                            name: 'Carregando...',
-                            email: 'Carregando...',
-                          );
-                          break;
-                        default:
-                          if (snapshot.hasError)
-                            return UserInfo(
-                              name: 'Ops!',
-                              email: 'Houve um erro',
-                            );
-                          else
-                            return UserInfo(
-                              name: postCtrl.post.user.name,
-                              email: postCtrl.post.user.email,
-                            );
-                      }
-                    })
-              ],
-            ),
-            Text(postCtrl.post.title),
-            Text(postCtrl.post.body),
+            FutureBuilder(
+                future: getUser(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return UserTile(
+                        name: 'Carregando...',
+                        email: 'Carregando...',
+                      );
+                      break;
+                    default:
+                      if (snapshot.hasError)
+                        return UserTile(
+                          name: 'Ops!',
+                          email: 'Houve um erro',
+                        );
+                      else
+                        return UserTile(
+                          name: postCtrl.post.user.name,
+                          email: postCtrl.post.user.email,
+                          userID: postCtrl.post.userId,
+                        );
+                  }
+                }),
+            Text(postCtrl.post.title,
+                style: Theme.of(context).textTheme.headline5),
+            Text(postCtrl.post.body,
+                style: Theme.of(context).textTheme.bodyText2),
           ],
         ),
       ),

@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
-import 'package:modular_posts/models/comment.dart';
-import 'package:modular_posts/models/post.dart';
 import 'package:modular_posts/models/user.dart';
 import 'package:modular_posts/services/feed_service.dart';
 part 'feed_controller.g.dart';
@@ -38,28 +36,4 @@ abstract class _FeedControllerBase with Store {
     }
     return true;
   }
-
-  // @action
-  // Future<bool> getComments(PostModel p) async {
-  //   // print('on FeedController > getComments()'); // TODO: remove
-
-  //   try {
-  //     List<dynamic> commentsJson = await feedService.getComments(p.id);
-  //     p.comments = commentsJson.map((c) => CommentModel.fromJson(c)).toList();
-  //     // print('${p.comments.length}');
-  //   } on DioError catch (e) {
-  //     print('onFeedController > getComments > ${e.message}');
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
-
-  // @action
-  // relateUsersToPosts() {
-  //   _posts.forEach((postCtrl) {
-  //     postCtrl.post.user =
-  //         _users[_users.indexWhere((u) => u.id == postCtrl.post.userId)];
-  //   });
-  // }
 }

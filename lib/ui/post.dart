@@ -43,19 +43,29 @@ class _PostState extends State<PostWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    (widget.postController.post.title).capitalize,
-                    style: Theme.of(context).textTheme.headline5,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    widget.postController.post.body.capitalize,
-                    style: Theme.of(context).textTheme.bodyText2,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 15,
-                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/details',
+                            arguments: widget.postController);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            (widget.postController.post.title).capitalize,
+                            style: Theme.of(context).textTheme.headline5,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            widget.postController.post.body.capitalize,
+                            style: Theme.of(context).textTheme.bodyText2,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 15,
+                          ),
+                        ],
+                      )),
                   FutureBuilder(
                       // Could be a StreamBuilder
                       future: widget.postController.getComments(),
