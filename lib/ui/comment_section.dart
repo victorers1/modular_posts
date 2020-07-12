@@ -14,14 +14,17 @@ class CommentSection extends StatelessWidget {
           'Comentários',
           style: Theme.of(context).textTheme.headline4.copyWith(fontSize: 20),
         ),
-        SizedBox(),
+        SizedBox(height: 20),
         FutureBuilder(
             future: postCtrl.getComments(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return CircularProgressIndicator();
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: CircularProgressIndicator(),
+                  );
                   break;
                 default:
                   if (snapshot.hasError)
@@ -29,12 +32,16 @@ class CommentSection extends StatelessWidget {
                       padding: EdgeInsets.all(30),
                       child: Text('Erro!'),
                     );
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: postCtrl.post.comments.length,
-                      itemBuilder: (context, index) => CommentWidget(
-                          comment: postCtrl.post.comments[index]));
+                  return ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 10);
+                    },
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: postCtrl.post.comments.length,
+                    itemBuilder: (context, index) =>
+                        CommentWidget(comment: postCtrl.post.comments[index]),
+                  );
               }
             })
       ],

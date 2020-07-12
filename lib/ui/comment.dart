@@ -5,7 +5,8 @@ import 'package:modular_posts/models/comment.dart';
 
 /// Comment Widget
 ///
-/// Shows email and comment message. Comment API has no author ID.
+/// Shows email and message.
+/// Comment API has no author ID.
 class CommentWidget extends StatefulWidget {
   final CommentModel comment;
   CommentWidget({@required this.comment});
@@ -21,7 +22,6 @@ class _CommentWidgetState extends State<CommentWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      dense: true,
       contentPadding: EdgeInsets.zero,
 
       // leading: CircleAvatar(
@@ -32,9 +32,8 @@ class _CommentWidgetState extends State<CommentWidget> {
           style: Theme.of(context).textTheme.bodyText1),
       subtitle: Text(
         widget.comment.body,
-        style: Theme.of(context).textTheme.caption,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+        style:
+            Theme.of(context).textTheme.caption.copyWith(color: Colors.black),
       ),
       trailing: FlatButton.icon(
         onPressed: () {
@@ -43,6 +42,7 @@ class _CommentWidgetState extends State<CommentWidget> {
             like = !like;
           });
         },
+        shape: CircleBorder(),
         textColor: Colors.redAccent,
         icon: Icon(like ? Icons.favorite : Icons.favorite_border),
         label: Text(likes.toString()),

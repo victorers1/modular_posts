@@ -26,7 +26,7 @@ class PostFooter extends StatelessWidget {
       alignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         FlatButton.icon(
-          onPressed: onLikePressed,
+          shape: CircleBorder(),
           icon: Icon(
             isLiked ? Icons.favorite : Icons.favorite_border,
             color: Colors.red,
@@ -35,7 +35,7 @@ class PostFooter extends StatelessWidget {
             likes.toString(),
             style: TextStyle(color: Colors.red),
           ),
-          splashColor: Colors.red[50],
+          onPressed: onLikePressed,
         ),
         FlatButton.icon(
           onPressed: onCommentPressed,
@@ -43,6 +43,7 @@ class PostFooter extends StatelessWidget {
           label: Text(
             comments.toString(),
           ),
+          shape: CircleBorder(),
         ),
       ],
     );
