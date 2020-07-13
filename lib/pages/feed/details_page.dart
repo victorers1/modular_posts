@@ -32,27 +32,28 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           FutureBuilder(
-              future: postCtrl.getUser(postCtrl.post.userId),
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                    return UserTileShimmer();
-                    break;
-                  default:
-                    if (snapshot.hasError)
-                      return UserTile(
-                        name: 'Ops!',
-                        email: 'Houve um erro',
-                      );
-                    else
-                      return UserTile(
-                        name: postCtrl.post.user.name,
-                        email: postCtrl.post.user.email,
-                        userID: postCtrl.post.userId,
-                      );
-                }
-              }),
+            future: postCtrl.getUser(postCtrl.post.userId),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return UserTileShimmer();
+                  break;
+                default:
+                  if (snapshot.hasError)
+                    return UserTile(
+                      name: 'Ops!',
+                      email: 'Houve um erro',
+                    );
+                  else
+                    return UserTile(
+                      name: postCtrl.post.user.name,
+                      email: postCtrl.post.user.email,
+                      userID: postCtrl.post.userId,
+                    );
+              }
+            },
+          ),
           SizedBox(height: 20),
           Text(
             postCtrl.post.title.capitalize,
