@@ -45,3 +45,7 @@ app.*.map.json
 #Node related
 node_modules/
 package-lock.json
+
+#Release related
+key.jks
+android/key.properties
