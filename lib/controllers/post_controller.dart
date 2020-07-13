@@ -57,12 +57,12 @@ abstract class _PostControllerBase with Store {
 
   @action
   Future<bool> getUser(int id) async {
-    print('on FeedController > getUsers()'); // TODO: remove
+    print('on FeedController > getUser()'); // TODO: remove
     try {
       Map<String, dynamic> userJson = await postService.getUser(id);
       post.user = UserModel.fromJson(userJson);
     } on DioError catch (e) {
-      print('onFeedController > getUsers() > ${e.message}');
+      print('onFeedController > getUser() > ${e.message}');
       return false;
     }
     return true;

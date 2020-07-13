@@ -72,41 +72,42 @@ class _PostState extends State<PostWidget> {
                         ],
                       )),
                   FutureBuilder(
-                      // Could be a StreamBuilder
-                      future: widget.postController.getComments(),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.none:
-                          case ConnectionState.waiting:
+                    // Could be a StreamBuilder
+                    future: widget.postController.getComments(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return PostFooter(
+                            likes: widget.postController.post.likes,
+                            comments:
+                                widget.postController.post.comments.length,
+                            onLikePressed: () {},
+                            onCommentPressed: () {},
+                          );
+                          break;
+                        default:
+                          if (snapshot.hasError)
+                            return PostFooter(
+                              likes: 0,
+                              comments: 0,
+                              // Null VoidCallbacks => button disabled
+                            );
+                          else
                             return PostFooter(
                               likes: widget.postController.post.likes,
                               comments:
                                   widget.postController.post.comments.length,
-                              onLikePressed: () {},
-                              onCommentPressed: () {},
+                              isLiked: widget.postController.post.like,
+                              onLikePressed: onLikePressed,
+                              onCommentPressed: () {
+                                Navigator.of(context).pushNamed('/details',
+                                    arguments: widget.postController);
+                              },
                             );
-                            break;
-                          default:
-                            if (snapshot.hasError)
-                              return PostFooter(
-                                likes: 0,
-                                comments: 0,
-                                // Null VoidCallbacks => button disabled
-                              );
-                            else
-                              return PostFooter(
-                                likes: widget.postController.post.likes,
-                                comments:
-                                    widget.postController.post.comments.length,
-                                isLiked: widget.postController.post.like,
-                                onLikePressed: onLikePressed,
-                                onCommentPressed: () {
-                                  Navigator.of(context).pushNamed('/details',
-                                      arguments: widget.postController);
-                                },
-                              );
-                        }
-                      })
+                      }
+                    },
+                  )
                 ],
               ),
             )

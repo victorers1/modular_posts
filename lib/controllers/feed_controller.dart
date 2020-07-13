@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:modular_posts/controllers/post_controller.dart';
-import 'package:modular_posts/models/user.dart';
 import 'package:modular_posts/services/feed_service.dart';
 part 'feed_controller.g.dart';
 
@@ -21,7 +20,7 @@ abstract class _FeedControllerBase with Store {
 
   @action
   Future<bool> getPosts(int userID) async {
-    print('on FeedController > getUsers()'); // TODO: remove
+    print('on FeedController > getPosts()'); // TODO: remove
     try {
       List<dynamic> postsJson = await feedService.getPosts(userID);
       _posts = ObservableList<PostController>.of(
