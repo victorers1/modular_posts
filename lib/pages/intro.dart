@@ -11,13 +11,20 @@ class IntroPage extends StatelessWidget {
           children: <Widget>[
             Text(
               'Seja bem-vindo(a)',
+              style: Theme.of(context).textTheme.headline4,
             ),
             RaisedButton(
+              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 15),
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
               onPressed: () {
-                print('Entrou');
                 Modular.to.pushNamed('/tabs');
               },
-              child: Text('Entrar'),
+              shape: StadiumBorder(),
+              child: Text(
+                'Entrar',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ],
         ),
