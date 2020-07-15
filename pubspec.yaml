@@ -14,6 +14,7 @@ dependencies:
   flutter_modular: ^1.2.7+1 # Routing and state management
   mobx: ^1.2.1+1 # MobX State management code
   flutter_mobx: ^1.1.0+1 # MobX integration to Flutter
+  shimmer: ^1.1.1 # Skeleton widget to show when page is loading
 
 dev_dependencies:
   flutter_test:
@@ -24,9 +25,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/ # Not working
+    - assets/img/profile.png
 
   # fonts:
   #   - family: Schyler
