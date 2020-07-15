@@ -1,6 +1,6 @@
 # modular_posts
 
-A new Flutter project using Dio, Modular w/ MobX to show posts provided by [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts).
+A new Flutter project using Dio, Modular and MobX to show posts provided by [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts).
 
 ## Running the app
 
