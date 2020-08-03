@@ -23,7 +23,7 @@ class UserService {
   );
 
   Future<Map<String, dynamic>> getUser(int userId) async {
-    print('on UserService > getUser($userId)'); // TODO: remove
+    print('on UserService > getUser($userId)');
     Response resp;
     try {
       resp = await dio.get('/users/$userId');

@@ -23,7 +23,7 @@ class FeedService {
   );
 
   Future<List<dynamic>> getPosts(int userID) async {
-    print('on FeedService > getPosts($userID)'); // TODO: remove
+    print('on FeedService > getPosts($userID)');
     Response resp;
     try {
       resp = await dio.get(userID == null ? '/posts' : '/posts?userID=$userID');
@@ -34,7 +34,7 @@ class FeedService {
   }
 
   // Future<List<dynamic>> getComments(int postId) async {
-  //   print('on FeedService > getComments($postId)'); // TODO: remove
+  //   print('on FeedService > getComments($postId)');
   //   Response resp;
   //   try {
   //     resp = await dio

@@ -23,7 +23,7 @@ class PostService {
   );
 
   Future<Map<String, dynamic>> getUser(int id) async {
-    print('on PostService > getUser($id)'); // TODO: remove
+    print('on PostService > getUser($id)');
     Response resp;
     try {
       resp = await dio.get('/users/$id');
@@ -36,7 +36,7 @@ class PostService {
   }
 
   Future<List<dynamic>> getComments(int postId) async {
-    print('on PostService > getComments($postId)'); // TODO: remove
+    print('on PostService > getComments($postId)');
     Response resp;
     try {
       resp = await dio

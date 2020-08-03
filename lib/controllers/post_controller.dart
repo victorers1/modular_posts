@@ -57,7 +57,7 @@ abstract class _PostControllerBase with Store {
 
   @action
   Future<bool> getUser(int id) async {
-    print('on FeedController > getUser()'); // TODO: remove
+    print('on FeedController > getUser()');
     try {
       Map<String, dynamic> userJson = await postService.getUser(id);
       post.user = UserModel.fromJson(userJson);

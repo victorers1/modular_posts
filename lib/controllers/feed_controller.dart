@@ -20,7 +20,7 @@ abstract class _FeedControllerBase with Store {
 
   @action
   Future<bool> getPosts(int userID) async {
-    print('on FeedController > getPosts()'); // TODO: remove
+    print('on FeedController > getPosts()');
     try {
       List<dynamic> postsJson = await feedService.getPosts(userID);
       _posts = ObservableList<PostController>.of(

@@ -16,7 +16,7 @@ abstract class _UserControllerBase with Store {
 
   @action
   Future<bool> getUser(int id) async {
-    print('on UserController > getUser()'); // TODO: remove
+    print('on UserController > getUser()');
     try {
       Map<String, dynamic> userJson = await userService.getUser(id);
       _user = UserModel.fromJson(userJson);

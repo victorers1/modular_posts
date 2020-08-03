@@ -14,7 +14,7 @@ class InitialModule extends MainModule {
   // Provide a list of dependencies to inject into your project
   @override
   List<Bind> get binds => [
-        Bind((_) => TabsController()), // TODO: for some reason it's not working
+        Bind((_) => TabsController()),
       ];
 
   // Provide all the routes for your module

@@ -12,7 +12,6 @@ class PostWidget extends StatefulWidget {
   _PostState createState() => _PostState();
 }
 
-// TODO: show original poster name
 class _PostState extends State<PostWidget> {
   onLikePressed() {
     setState(() {
